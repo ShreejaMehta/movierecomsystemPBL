@@ -110,7 +110,7 @@ def predict_movies(movie_name = "The Dark Knight", num = 10, verbose = 0, out = 
     try:
         ind = data[data['original_title'] == movie_name].index[0]
         output = data.loc[[val for val in np.argsort(tf_idf[ind])[::-1][1:num+1]]]
-        if verbose == 2:
+        if verbose <1:
             print("The TF-IDF Cosine similarity scores for relevant movies are as follows:\n")
             print([round(val,2) for val in np.sort(tf_idf[ind])[::-1][1:num+1]], '\n')
         if verbose >= 1:
@@ -130,7 +130,7 @@ def predict_movies(movie_name = "The Dark Knight", num = 10, verbose = 0, out = 
 movies = top_movies(5000)
 tf_idf = generate_cosine_tfidf(movies, alpha = 0.6)
 
-# print(predict_movies("Moana", num = 10, verbose = 2, out = True, data = movies, tf_idf = tf_idf))
+print(predict_movies("Moana", num = 10, verbose = 0, out = True, data = movies, tf_idf = tf_idf))
 
 # predict_movies("The Dark Knight", num = 10 , verbose = 2, out = False, data = movies, tf_idf = tf_idf)
 
